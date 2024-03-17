@@ -52,7 +52,13 @@ def _resolve_span(tag: Tag):
 
 
 def _resolve_link(tag: Tag):
+    # SEE EN "Notion migration - PARSING ENEX | Maintaining Evernote URLs/links"
+    # > - regarding changing _resolve_link function to not filter out evernote links: I should simply delete "and "evernote://" not in tag.get("href")", right?
+    # Right, just leave
+    # if tag.get("href"):
+    #     return "a", tag["href"]
+
     # TODO: resolve using note title or link list
-    if tag.get("href") and "evernote://" not in tag.get("href"):
+    if tag.get("href"):
         return "a", tag["href"]
     return None
